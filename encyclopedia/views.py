@@ -23,8 +23,13 @@ def bar(request):
     if request.method == "POST":
         search = request.POST["entry"]
         if util.get_entry(search) == None:
+            all = util.list_entries()
+            print(all)
+            similar = [k for k in all if search in k]
+            print(similar)
             return render(request, "encyclopedia/error.html", {
-            "name": entry
+            "name": entry,
+            "similar": similar
             })
         else:
             return entry(request, search)
