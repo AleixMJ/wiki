@@ -18,3 +18,13 @@ def entry(request, entry):
             "name": entry,       
             "entry":util.get_entry(entry)
         })
+
+def bar(request):
+    if request.method == "POST":
+        search = request.POST["entry"]
+        if util.get_entry(search) == None:
+            return render(request, "encyclopedia/error.html", {
+            "name": entry
+            })
+        else:
+            return entry(request, search)
