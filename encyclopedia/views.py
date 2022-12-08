@@ -10,6 +10,11 @@ def index(request):
 
 def entry(request, entry):
     if util.get_entry(entry) == None:
-        return render(request, "encyclopedia/error.html")
+        return render(request, "encyclopedia/error.html", {
+            "name": entry
+        })
     else:
-        return render(request, "encyclopedia/entry.html")
+        return render(request, "encyclopedia/entry.html", {     
+            "name": entry,       
+            "entry":util.get_entry(entry)
+        })
