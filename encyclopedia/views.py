@@ -1,4 +1,5 @@
 from django.shortcuts import render
+import markdown
 
 from . import util
 
@@ -14,9 +15,9 @@ def entry(request, entry):
             "name": entry
         })
     else:
-        return render(request, "encyclopedia/entry.html", {     
-            "name": entry,       
-            "entry":util.get_entry(entry)
+        formated = markdown.markdown(util.get_entry(entry))
+        return render(request, "encyclopedia/entry.html", {    
+            "entry":formated
         })
 
 def bar(request):
