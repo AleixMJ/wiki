@@ -27,7 +27,7 @@ def bar(request):
             print(all)
             similar = [k for k in all if search in k]
             print(similar)
-            return render(request, "encyclopedia/error.html", {
+            return render(request, "encyclopedia/results.html", {
             "name": entry,
             "similar": similar
             })

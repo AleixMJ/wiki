@@ -9,14 +9,4 @@
 
     <p>The requested page cannot be found</p>
 
-    {% if similar != None %}
-
-        <p> Below is a list of the Encyclopedia that could match your search:</p>
-        <ul>
-            {% for entry in similar %}
-                <li><a href="{% url 'entry' entry=entry %}" >{{ entry }}</a></li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-
 {% endblock %}

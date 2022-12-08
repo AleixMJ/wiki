@@ -1,0 +1,17 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{name}}
+{% endblock %}
+
+{% block body %}
+    <h1>Search Results</h1>
+
+        <p> Below you can see a list of pages that could match your search:</p>
+        <ul>
+            {% for entry in similar %}
+                <li><a href="{% url 'entry' entry=entry %}" >{{ entry }}</a></li>
+            {% endfor %}
+        </ul>
+
+{% endblock %}
