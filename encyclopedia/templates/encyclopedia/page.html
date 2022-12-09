@@ -1,0 +1,21 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+    <h1>New Page</h1>
+
+    <form action="{% url 'page' %}" method="POST">
+        <p>Add the title of the new page:</p>
+        <p>Add the body of the new page:</p>
+        <textarea name="page" rows="10" cols="50"></textarea>
+        <br>
+        <input type="submit" value="Save Page">
+      </form>
+      
+      <p>Click the "Submit" button and the form-data will be sent to a page on the 
+      server called "action_page.php".</p>
+
+{% endblock %}
