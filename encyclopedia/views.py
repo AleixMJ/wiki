@@ -37,4 +37,14 @@ def bar(request):
             return entry(request, search)
 
 def page(request):
-    return render(request, "encyclopedia/page.html")
+    if request.method == "POST":
+        title = request.POST["title"]
+        if util.get_entry(title) != None:
+            return render(request, "encyclopedia/error2.html", {
+            "title": title
+            })
+        return entry(request, title)
+
+    else:
+
+        return render(request, "encyclopedia/page.html")

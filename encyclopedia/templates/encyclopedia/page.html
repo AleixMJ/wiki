@@ -8,8 +8,9 @@
     <h1>New Page</h1>
 
     <form action="{% url 'page' %}" method="POST">
-        <p>Add the title of the new page:</p>
-        <p>Add the body of the new page:</p>
+        {% csrf_token %}
+        <input type="text" name="title" placeholder="Page Title">
+        <p>Add the body of the new page:</p>        
         <textarea name="page" rows="5" cols="50"></textarea>
         <br>
         <input type="submit" value="Save Page">
