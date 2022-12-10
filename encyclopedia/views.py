@@ -13,7 +13,8 @@ def index(request):
 def entry(request, entry):
     if util.get_entry(entry) == None:
         return render(request, "encyclopedia/error.html", {
-            "name": entry
+            "name": entry,
+            "error": "The requested page doesn't exist"
         })
     else:
         formated = markdown.markdown(util.get_entry(entry))
@@ -41,9 +42,10 @@ def page(request):
         title = request.POST["title"]
         content = request.POST["page"]
         if util.get_entry(title) != None:
-            return render(request, "encyclopedia/error2.html", {
-            "title": title
-            })
+            return render(request, "encyclopedia/error.html", {
+            "name": title,
+            "error": "The page already exist, please use the edit function"
+        })
         else:
             util.save_entry(title, content)
             return entry(request, title)
