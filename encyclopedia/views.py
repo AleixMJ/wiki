@@ -39,11 +39,14 @@ def bar(request):
 def page(request):
     if request.method == "POST":
         title = request.POST["title"]
+        content = request.POST["page"]
         if util.get_entry(title) != None:
             return render(request, "encyclopedia/error2.html", {
             "title": title
             })
-        return entry(request, title)
+        else:
+            util.save_entry(title, content)
+            return entry(request, title)
 
     else:
 
