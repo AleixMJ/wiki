@@ -27,9 +27,7 @@ def bar(request):
         search = request.POST["entry"]
         if util.get_entry(search) == None:
             all = util.list_entries()
-            print(all)
-            similar = [k for k in all if search in k]
-            print(similar)
+            similar = [k for k in all if search.lower() in k.lower()]
             return render(request, "encyclopedia/results.html", {
             "name": entry,
             "similar": similar
