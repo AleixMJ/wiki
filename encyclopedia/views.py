@@ -12,7 +12,7 @@ def index(request):
         "entries": util.list_entries()
     })
 
-
+# Function that checks if an entry exist
 def entry(request, entry):
     # Check that the entry exists regardless of the capitalisation used
     allEntries = util.list_entries()
@@ -61,6 +61,7 @@ def bar(request):
             "error": "The requested page doesn't exist"
         })
 
+# Function used to create new pages for the wiki
 def page(request):
     if request.method == "POST":
         title = request.POST["title"]
@@ -74,7 +75,8 @@ def page(request):
                 "name": title,
                 "error": "The page already exist, please use the edit function"
                 })
-    # If the entry does not exist, then save the entry and render the new page by calling entry function.           
-    util.save_entry(title, content)            
-    return entry(request, title)
-
+        # If the entry does not exist, then save the entry and render the new page by calling entry function.           
+        util.save_entry(title, content)            
+        return entry(request, title)
+    else:
+        return render(request, "encyclopedia/page.html")
