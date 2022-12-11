@@ -6,7 +6,7 @@ from . import util
 
 
 
-
+# Main function that lists all the entries of the wiki
 def index(request):
     return render(request, "encyclopedia/index.html", {
         "entries": util.list_entries()
@@ -80,3 +80,9 @@ def page(request):
         return entry(request, title)
     else:
         return render(request, "encyclopedia/page.html")
+
+# Function to edit entries
+def edit(request, entry):
+    return render(request, "encyclopedia/edit.html", {
+        "name": entry
+    })

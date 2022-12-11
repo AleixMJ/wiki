@@ -1,17 +1,16 @@
 {% extends "encyclopedia/layout.html" %}
 
 {% block title %}
-    New Page
+    Edit Page
 {% endblock %}
 
 {% block body %}
-    <h1>New Page</h1>
+    <h1>Edit Page</h1>
 
     <form action="{% url 'page' %}" method="POST">
         {% csrf_token %}
-        <input type="text" name="title" placeholder="Page Title">
-        <p>Add the body of the new page in Markdown format:</p>        
-        <textarea name="page"></textarea>
+        <input type="text" name="title" placeholder="Page Title">   
+        <textarea name="page">{{entry}}</textarea>
         <br>
         <input type="submit" value="Save Page">
       </form>
