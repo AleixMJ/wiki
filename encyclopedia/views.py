@@ -66,6 +66,12 @@ def page(request):
     if request.method == "POST":
         title = request.POST["title"]
         content = request.POST["page"]
+        
+        # Check if the request was submited by Edit and process acordingly
+        if request.POST["edit"] == "edit":
+            util.save_entry(title, content)            
+            return entry(request, title)
+
         # Check that the entry exists regardless of the capitalisation used
         allEntries = util.list_entries()
         for x in allEntries:
@@ -83,7 +89,10 @@ def page(request):
 
 # Function to edit entries
 def edit(request):
-    body = util.get_entry(request.POST["entry"])
-    return render(request, "encyclopedia/edit.html", {
-        "body": body
-    })
+        title = request.POST["entry"]
+        body = util.get_entry(title)
+        return render(request, "encyclopedia/edit.html", {
+            "body": body,
+            "title": title
+        })
+
