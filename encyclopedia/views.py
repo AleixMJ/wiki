@@ -82,7 +82,8 @@ def page(request):
         return render(request, "encyclopedia/page.html")
 
 # Function to edit entries
-def edit(request, entry):
+def edit(request):
+    body = util.get_entry(request.POST["entry"])
     return render(request, "encyclopedia/edit.html", {
-        "name": entry
+        "body": body
     })

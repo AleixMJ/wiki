@@ -7,15 +7,13 @@
 {% block body %}
     <h1>Edit Page</h1>
 
-    <form action="{% url 'page' %}" method="POST">
+    <form action="{% url 'edit' %}" method="POST">
         {% csrf_token %}
-        <input type="text" name="title" placeholder="Page Title">   
-        <textarea name="page">{{entry}}</textarea>
+        <p>Modify the body of the page in Markdown format:</p>        
+        <textarea name="page">{{body}}</textarea>
         <br>
         <input type="submit" value="Save Page">
-      </form>
+      </form>    
       
-      <p>Click the "Submit" button and the form-data will be sent to a page on the 
-      server called "action_page.php".</p>
 
 {% endblock %}
