@@ -4,6 +4,9 @@ import markdown
 from . import util
 
 
+
+
+
 def index(request):
     return render(request, "encyclopedia/index.html", {
         "entries": util.list_entries()
@@ -11,15 +14,23 @@ def index(request):
 
 
 def entry(request, entry):
-    if util.get_entry(entry) == None:
+    allEntries = util.list_entries()
+    response = entry
+    for x in allEntries:
+        if x.lower() == entry.lower():
+            response = x
+            break    
+    temp = markdown.Markdown()
+    name = util.get_entry(response)
+    if name is None:
         return render(request, "encyclopedia/error.html", {
             "name": entry,
             "error": "The requested page doesn't exist"
         })
-    else:
-        formated = markdown.markdown(util.get_entry(entry))
+    else:       
         return render(request, "encyclopedia/entry.html", {    
-            "entry":formated
+            "entry":temp.convert(name),
+            "name": entry
         })
 
 def bar(request):
@@ -45,7 +56,7 @@ def page(request):
             "error": "The page already exist, please use the edit function"
         })
         else:
-            util.save_entry(title, content)
+            util.save_entry(title, content)            
             return entry(request, title)
 
     else:
