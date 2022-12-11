@@ -1,5 +1,6 @@
 from django.shortcuts import render
 import markdown
+import random
 
 from . import util
 
@@ -66,7 +67,7 @@ def page(request):
     if request.method == "POST":
         title = request.POST["title"]
         content = request.POST["page"]
-        
+
         # Check if the request was submited by Edit and process acordingly
         if request.POST["edit"] == "edit":
             util.save_entry(title, content)            
@@ -96,3 +97,8 @@ def edit(request):
             "title": title
         })
 
+# Random Function that takes the user to a random entry
+def randomise(request):
+    test = util.list_entries()
+    selected = random.choice(test)
+    return entry(request, selected)
